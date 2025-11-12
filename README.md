@@ -1,6 +1,7 @@
 # CUDA Training Nways — Instructions
 
-For this training you’ll need access to an environment with **multiple GPUs** to complete all hands-on activities. The **first section** can be done with a **single local GPU**.
+For this training you’ll need access to an environment with **multiple GPUs** to complete all hands-on activities. The **first section** can be done with a **single node and multiple GPUs**.
+Additionally, you will need **NVIDIA Nsight Systems** for the profiling exercises; please make sure it is **installed locally** so you can follow along. Download it here: [NVIDIA Nsight Systems](https://developer.nvidia.com/nsight-systems).
 
 ---
 
