@@ -28,7 +28,7 @@ srun_4g() {
 
 ---
 
-## 5) Sanity check (confirm multiple GPUs)
+## 2) Sanity check (confirm multiple GPUs)
 
 ```bash
 srun_4g nvidia-smi
