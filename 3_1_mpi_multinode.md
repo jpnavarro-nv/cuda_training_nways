@@ -36,7 +36,8 @@ mpirun -np 4 ./hello_world
 
 ```
 
-## 
+## jacobi_memcpy_mpi.sh
+
 ```
 #!/bin/bash
 #SBATCH -p curso
