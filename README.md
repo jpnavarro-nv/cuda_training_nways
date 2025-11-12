@@ -53,7 +53,7 @@ Define a helper to simplify compile/run commands. Adjust `--gres=gpu:<N>` to the
 
 ```bash
 srun_1g() {
-  srun -A <ACCOUNT> -p <PARTITION> -N 1 --time=01:00:00 --gres=gpu:1 --pty "$@"
+  srun -A <ACCOUNT> -p <PARTITION> -N 1 --time=04:00:00 --gres=gpu:1 --pty "$@"
 }
 ```
 
@@ -61,7 +61,7 @@ srun_1g() {
 
 ```bash
 srun_1g() {
-  srun -p curso -N 1 --time=00:04:00 --gres=gpu:1 --pty "$@"
+  srun -p curso -N 1 --time=04:00:00 --gres=gpu:1 --pty "$@"
 }
 ```
 
