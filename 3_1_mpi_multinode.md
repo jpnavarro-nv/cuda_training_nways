@@ -42,8 +42,8 @@ mpirun -np 4 ./hello_world
 #!/bin/bash
 #SBATCH -p curso
 #SBATCH -N 2
-#SBATCH --ntasks-per-node=2
-#SBATCH --gres=gpu:1
+#SBATCH --ntasks-per-node=4
+#SBATCH --gres=gpu:4
 #SBATCH --time=01:00:00
 #SBATCH -o jacobi_memcpy_mpi_%j.out
 
