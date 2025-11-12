@@ -18,7 +18,7 @@ mpirun -np 2 ./hello_world
 
 ```
 
-## Multi Node
+## Multiple Nodes
 
 ```
 #!/bin/bash
