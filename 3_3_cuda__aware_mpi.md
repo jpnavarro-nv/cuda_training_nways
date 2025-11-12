@@ -21,8 +21,6 @@ mpirun -np 8 --map-by ppr:2:socket ./jacobi_cuda_aware_mpi -ny 32768
 
 > Note: `--map-by ppr:2:socket` launches 2 MPI ranks per socket (total of 8 ranks across 2 nodes). Ensure the binary name and CLI flags are spaced exactly as shown.
 
----
-
 ## Submit the job
 
 ```bash
