@@ -11,7 +11,7 @@ Save the following content to `jacobi_cuda_aware_mpi.sh`:
 #SBATCH --ntasks-per-node=4
 #SBATCH --gres=gpu:4
 #SBATCH --time=01:00:00
-#SBATCH -o jacobi_memcpy_mpi_%j.out
+#SBATCH -o jacobi_cuda_aware_mpi_%j.out
 
 module purge
 module load nvhpc-hpcx/23.11
