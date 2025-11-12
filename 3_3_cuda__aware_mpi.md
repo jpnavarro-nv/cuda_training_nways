@@ -1,6 +1,6 @@
 # CUDA-aware MPI
 
-## 1) Implementation Exercise: Part 2
+## Implementation Exercise: Part 2
 
 Save the following content to `jacobi_cuda_aware_mpi.sh`:
 
@@ -23,7 +23,7 @@ mpirun -np 8 --map-by ppr:2:socket ./jacobi_cuda_aware_mpi -ny 32768
 
 ---
 
-## 2) Submit the job
+## Submit the job
 
 ```bash
 sbatch jacobi_cuda_aware_mpi.sh
@@ -31,7 +31,7 @@ sbatch jacobi_cuda_aware_mpi.sh
 
 ---
 
-## 3) Increase iterations and compare the results
+## Increase iterations and compare the results
 
 Edit only the last line of the script to raise the iteration count and resubmit. The higher iteration count increases the compute-to-communication ratio, so **efficiency should improve**.
 
