@@ -38,3 +38,30 @@ mpirun -np 8 --map-by ppr:2:socket ./jacobi_cuda_aware_mpi -ny 32768 -niter 5000
 ```
 
 After both runs complete, compare the reported timings/throughput in the output files (e.g., `jacobi_memcpy_mpi_<jobid>.out`) to confirm the efficiency gain.
+
+---
+
+## GPUDirect RDMA
+
+Update your previous `sbatch` to allocate a single MPI rank and one GPU per node:
+
+```bash
+#SBATCH --ntasks-per-node=1
+#SBATCH --gres=gpu:1
+```
+
+### Run with GDR enabled (10,000 iterations)
+
+```bash
+mpirun -np 2 --map-by ppr:1:node \
+  ./jacobi_cuda_aware_mpi -ny 128 -skip_single_gpu -niter 10000
+```
+
+### Run with GDR disabled
+
+```bash
+mpirun -np 2 --map-by ppr:1:node \
+  -x UCX_IB_GPU_DIRECT_RDMA=no \
+  ./jacobi_cuda_aware_mpi -ny 128 -skip_single_gpu -niter 10000
+```
+
