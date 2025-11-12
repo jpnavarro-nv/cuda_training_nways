@@ -1,4 +1,4 @@
-# 2.1 CUDA Training Nways — Multi-GPU Instructions
+# 2.1 CUDA Memcpy and Peer-to-Peer Memory Access
 
 For this section you’ll need access to **multiple GPUs**. Adjust your `srun` scripts to use **2 or 4 GPUs**, depending on resource availability. The examples below show a **4-GPU** request on **LNCC** and **GAIA**—update the `--gres=gpu:<N>` value to match what you can allocate.
 
