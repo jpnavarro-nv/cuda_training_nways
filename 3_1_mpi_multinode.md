@@ -3,8 +3,8 @@
 ```
 #!/bin/bash
 #SBATCH -p curso
-#SBATCH -N 2
-#SBATCH --ntasks-per-node=1
+#SBATCH -N 1
+#SBATCH --ntasks-per-node=2
 #SBATCH --gres=gpu:1
 #SBATCH --time=01:00:00
 #SBATCH -o hello_world_%j.out
