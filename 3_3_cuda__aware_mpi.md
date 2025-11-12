@@ -1,6 +1,6 @@
 # CUDA-aware MPI
 
-## 1) Create the `jacobi_cuda_aware_mpi.sh` script
+## 1) Implementation Exercise: Part 2
 
 Save the following content to `jacobi_cuda_aware_mpi.sh`:
 
