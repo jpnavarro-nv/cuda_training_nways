@@ -1,0 +1,42 @@
+# Copyright (c) 2019, NVIDIA CORPORATION. All rights reserved.
+NP ?= 1
+NVCC=nvcc
+MPIRUN ?= mpirun
+
+CUDA_HOME ?= $(shell dirname $$(dirname $$(readlink -f $$(which nvcc 2>/dev/null)))))
+CUDA_HOME := $(patsubst %/compilers,%/cuda,$(CUDA_HOME))
+NVHPC_ROOT := $(dir $(CUDA_HOME))
+
+NVSHMEM_HOME ?= $(NVHPC_ROOT)comm_libs/12.3/nvshmem
+
+MPI_CXX ?= mpic++
+
+MPI_RAW_COMPILE_FLAGS := $(shell $(MPI_CXX) --showme:compile 2>/dev/null)
+MPI_RAW_LINK_FLAGS    := $(shell $(MPI_CXX) --showme:link    2>/dev/null)
+
+MPI_INC_FLAGS := $(filter -I%,$(MPI_RAW_COMPILE_FLAGS))
+MPI_LIB_FLAGS := $(filter-out -pthread -Wl%,$(MPI_RAW_LINK_FLAGS))
+
+GENCODE_SM70    := -gencode arch=compute_70,code=sm_70
+GENCODE_SM80    := -gencode arch=compute_80,code=sm_80 -gencode arch=compute_80,code=compute_80
+GENCODE_FLAGS	:= $(GENCODE_SM70) $(GENCODE_SM80)
+
+NVCC_FLAGS += -dc -Xcompiler -fopenmp -lineinfo -lnvToolsExt $(GENCODE_FLAGS) -std=c++14 \
+              -I$(NVSHMEM_HOME)/include $(MPI_INC_FLAGS) -ccbin=$(MPI_CXX)
+
+NVCC_LDFLAGS = $(MPI_LIB_FLAGS) \
+               -L$(NVSHMEM_HOME)/lib -lnvshmem -lnvidia-ml \
+               -L$(CUDA_HOME)/lib64 -lcuda -lcudart -lnvToolsExt \
+               -ccbin=$(MPI_CXX)
+
+left_shift: Makefile left_shift.cu
+	$(NVCC) $(NVCC_FLAGS) left_shift.cu -c -o left_shift.o
+	$(NVCC) $(GENCODE_FLAGS) left_shift.o -o left_shift $(NVCC_LDFLAGS)
+
+jacobi_nvshmem: Makefile jacobi_nvshmem.cu
+	$(NVCC) $(NVCC_FLAGS) jacobi_nvshmem.cu -c -o jacobi_nvshmem.o
+	$(NVCC) $(GENCODE_FLAGS) jacobi_nvshmem.o -o jacobi_nvshmem $(NVCC_LDFLAGS)
+
+.PHONY.: clean
+clean:
+	rm -rf jacobi_nvshmem left_shift *.o *.qdrep *.sqlite
