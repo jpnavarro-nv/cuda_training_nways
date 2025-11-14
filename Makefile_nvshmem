@@ -3,7 +3,7 @@ NP ?= 1
 NVCC=nvcc
 MPIRUN ?= mpirun
 
-CUDA_HOME ?= $(shell dirname $$(dirname $$(readlink -f $$(which nvcc 2>/dev/null)))))
+CUDA_HOME ?= $(shell dirname $$(dirname $$(readlink -f $$(which nvcc 2>/dev/null))))
 CUDA_HOME := $(patsubst %/compilers,%/cuda,$(CUDA_HOME))
 NVHPC_ROOT := $(dir $(CUDA_HOME))
 
